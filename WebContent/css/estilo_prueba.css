@@ -1,0 +1,11 @@
+.tilde_ok{
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    background-color: chartreuse;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    border-radius: 50%;
+    text-align: center;
+}

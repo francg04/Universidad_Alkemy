@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pruebas Varias</title>
+    <script src="js/pruebas_varias.js"></script>
+    <link rel="StyleSheet" type="text/css" href="WebContent/css/estilo_prueba.css">
+</head>
+<body>
+    <table class="tabla_profesores">
+        <caption>
+            PROFESORES
+        </caption>
+        <tr>
+            <th class="encabezado">Legajo</th><th class="encabezado">Nombre</th><th class="encabezado">Apellido</th><th class="encabezado">Genero</th><th class="encabezado">Documento</th><th class="encabezado">Activo</th><th  class="encabezado" id="agregar">Agregar</th>
+        </tr>
+        <tr class="dato" id="1">
+            <td>
+                <div>
+                    <input type="text" id="leg1" readonly disabled value="1"></td>
+                    <div tilde_ok>√</div> <!--alt + 251 = √-->
+                </div>
+                
+            <td><input type="text" id="nom1" readonly disabled value="Alberto"></td>
+            <td><input type="text" id="ape1" readonly disabled value="Hijo de puta"></td>
+            <td>
+                <input type="text" id="gen1" readonly disabled value="Masculino">
+                <!--
+                <select  readonly disabled>
+                    <option value="1">Masculino</option>
+                    <option value="0">Femenino</option>
+                    <option value="2" selected>homosesual</option>
+                </select>
+                -->
+            </td>
+            <td><input type="text" id="cod1" readonly disabled value="17457124"></td>
+            <td><input type="text" id="act1" readonly disabled value="Pasivo"></td>
+            <td><input type="button" value="Actualizar"><input type="button" value="Eliminar"></td>
+        </tr>
+    </table>
+</body>
+</html>

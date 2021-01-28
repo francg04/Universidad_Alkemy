@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Universidad Alkemy</title>
+    <link rel="StyleSheet" type="text/css" href="css/estilo.css">
+    <script src="js/universidad_script.js" ></script>
+</head>
+<body onload="cargar_variables()">
+    <header>
+		<h1><a id="logo_loguin" href="https://www.alkemy.org/"></a>Universidad alkemy</h1>
+		<ul>
+			<li><a href="#" class="subrayado">cargar profesores</a></li>
+			<li><a href="#" class="subrayado">gestionar materias</a></li>
+		</ul>
+    </header>
+    <article>
+        <div class="slidershow middle">
+            <div class="slides">
+                <input type="radio" name="rbt" id="rbt1">
+                <input type="radio" name="rbt" id="rbt2">
+                <input type="radio" name="rbt" id="rbt3">
+                <input type="radio" name="rbt" id="rbt4">
+                <input type="radio" name="rbt" id="rbt5">
+                <script>
+                    let btn = document.getElementById("rbt1");
+                </script>
+                <div class="slide s1">
+                    <img src="img/1.jpg" alt="">
+                </div>
+                <div class="slide">
+                    <img src="img/2.jpg" alt="">
+                </div>
+                <div class="slide">
+                    <img src="img/3.jpg" alt="">
+                </div>
+                <div class="slide">
+                    <img src="img/4.jpg" alt="">
+                </div>
+                <div class="slide">
+                    <img src="img/5.jpg" alt="">
+                </div>
+            </div>
+            <div class="navigation">
+                <label for="rbt1" class="barra"></label>
+                <label for="rbt2" class="barra"></label>
+                <label for="rbt3" class="barra"></label>
+                <label for="rbt4" class="barra"></label>
+                <label for="rbt5" class="barra"></label>
+            </div>
+        </div>
+        <section>
+            <form action="principal" method="GET" id="form_buscador">
+                <table class="tabla_buscador">
+                    <tr>
+                        <td>
+                            &nbsp;
+                        </td>
+                        <td>
+                            &nbsp;
+                        </td>
+                        <td>
+                            &nbsp;
+                        </td>
+                        <td>
+                            <input type="text" placeholder="Buscar por..." name="search_professors" id="buscar">
+                        </td>
+                        <!--
+                        <script>
+                            let txtInput = document.getElementById("buscar");
+                            txtInput.style.border= "solid 4px green";
+                        </script>
+                        -->
+                        <td>
+                            <input type="submit" value="Buscar" id="btn_buscar">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="radio" id="p_todo" name="search_parameter" value="all" checked>
+                            <label for="p_todo"> Todo</label>
+                        </td>
+                        <td>
+                            <input type="radio" id="p_nombre" name="search_parameter" value="nombre">
+                            <label for="p_nombre"> Nombre</label>
+                        </td>
+                        <td>
+                            <input type="radio" id="p_apellido" name="search_parameter" value="apellido">
+                            <label for="p_apellido"> Apellido</label>
+                        </td>
+                        <td>
+                            <input type="radio" id="p_documento" name="search_parameter" value="documento">
+                            <label for="p_documento"> Documento</label>
+                        </td>
+                        <td>
+                            <input type="checkbox" id="p_genero" value="genero">
+                            <label for="p_genero"> Genero</label>
+                        </td>
+                        <td>
+                            <select name="search_gender" id="p_genero_elegido">
+                                <option value="1">Masculino</option>
+                                <option value="0">Femenino</option>
+                            </select>
+                        </td>
+                        <td>
+                            <input type="checkbox" id="p_estado" name="search_parameter" value="estado">
+                            <label for="p_estado"> Activo</label>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+                <!--Datos obtenidos de DB-->
+            <table class="tabla_profesores">
+                <caption>
+                    PROFESORES
+                </caption>
+                <tr>
+                    <th class="encabezado">Legajo</th><th class="encabezado">Nombre</th><th class="encabezado">Apellido</th><th class="encabezado">Genero</th><th class="encabezado">Documento</th><th class="encabezado">Activo</th><th  class="encabezado" id="agregar">Agregar</th>
+                </tr>
+                <tr class="dato" id="1">
+                    <td><input type="text" id="leg1" readonly disabled value="1"></td>
+                    <td><input type="text" id="nom1" readonly disabled value="Alberto"></td>
+                    <td><input type="text" id="ape1" readonly disabled value="Hijo de puta"></td>
+                    <td>
+                        <input type="text" id="gen1" readonly disabled value="Masculino">
+                        <!--
+                        <select  readonly disabled>
+                            <option value="1">Masculino</option>
+                            <option value="0">Femenino</option>
+                            <option value="2" selected>homosesual</option>
+                        </select>
+                        -->
+                    </td>
+                    <td><input type="text" id="cod1" readonly disabled value="17457124"></td>
+                    <td><input type="text" id="act1" readonly disabled value="Pasivo"></td>
+                    <td><a href="#" class="verde">Actualizar</a>&nbsp;<a href="#" class="rojo">Eliminar</a></td>
+                </tr>
+            </table>
+            <!--AGREGAR PROFESOR-->
+            <form action="Principal" method="GET" id="agregar_profesor">
+                <fieldset>
+                    <input type="hidden" name="instruccion" value="insert_professor">
+                    <legend>Agregar Profesor</legend>
+                    <table>
+                        <tr>
+                            <td><label for="nombre">Nombre</label></td>
+                            <td><input type="text" name="professor_name" id="nombre"></td>
+                        </tr>
+                        <tr>
+                            <td><label for="apellido">Apellido</label></td>
+                            <td><input type="text" name="professor_lastName" id="apellido"></td>
+                        </tr>
+                        <tr>
+                            <td><label for="documento">Documento</label></td>
+                            <td><input type="text" name="document" id="documento"></td>
+                        </tr>
+                        <tr>
+                            <td><input type="radio" name="gender" id="masculino" value="1"><label for="masculino">Masculino</label></td>
+                            <td><input type="radio" name="gender" id="femenino" value="0"><label for="femenino">Femenino</label></td>
+                        </tr>
+                        <tr>
+                            <td><label for="activo">Activo </label><input type="checkbox" name="active" id="activo"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"><input type="submit" value="Registrar"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"><input type="reset" value="Refrescar"></td>
+                        </tr>
+                    </table>
+                </fieldset>
+            </form>
+        </section>
+    </article>
+</body>
+</html>

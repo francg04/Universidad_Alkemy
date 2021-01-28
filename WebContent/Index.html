@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Universidad Alkemy</title>
+    <link rel="StyleSheet" type="text/css" href="css/estilo.css">
+</head>
+<body>
+    <header>
+        <h1><a id="logo_loguin" href="https://www.alkemy.org/"></a>Universidad alkemy</h1>
+        <form action="Principal" method="get">
+        <input type="hidden" name="instruccion" value="loguin">
+            <fieldset>
+                <legend>LOGUIN</legend>
+                <table>
+                    <tr>
+                        <td><label for="user">Usuario</label></td> <td><input type="text" name="user"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="pass">Contraseña</label></td> <td><input type="password" name="pass"></td>
+                    </tr>
+                    <tr>
+                     <td><input type="radio" name="user_type" id="admin" value="1"><label for="admin">Administrador</label></td>
+                        <td><input type="radio" name="user_type" id="alumno" value="2"><label for="alumno">Alumno</label></td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td><td>&nbsp;</td><td><input type="submit" value="Loguin" class="boton"></td>
+                    </tr>
+                </table>
+            </fieldset>
+        </form>
+    </header>
+</body>
+</html>
