@@ -4,15 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Universidad Alkemy</title>
-    <link rel="StyleSheet" type="text/css" href="css/estilo.css">
-    <script src="js/universidad_script.js" ></script>
+    <script src="js/universidad_script.js?"></script>
+    <link rel="StyleSheet" type="text/css" href="css/estilo.css?">
 </head>
 <body onload="cargar_variables()">
-    <header>
+    <header id="Menu_Principal">
 		<h1><a id="logo_loguin" href="https://www.alkemy.org/"></a>Universidad alkemy</h1>
-		<ul>
-			<li><a href="#" class="subrayado">cargar profesores</a></li>
-			<li><a href="#" class="subrayado">gestionar materias</a></li>
+        <b class="saludo">Bienvenido Franco, Garcia</b>
+        <ul>
+			<li id="btn_SeccProfesores"><a href="#" class="subrayado">cargar profesores</a></li>
+			<li id="btn_SeccMaterias"><a href="#" class="subrayado">gestionar materias</a></li>
 		</ul>
     </header>
     <article>
@@ -51,29 +52,14 @@
             </div>
         </div>
         <section>
+            <!--Buscar profesores-->
             <form action="principal" method="GET" id="form_buscador">
+                <input type="hidden" name="instruccion" value="buscar_profesor">
                 <table class="tabla_buscador">
                     <tr>
-                        <td>
-                            &nbsp;
-                        </td>
-                        <td>
-                            &nbsp;
-                        </td>
-                        <td>
-                            &nbsp;
-                        </td>
-                        <td>
+                        <td colspan="7" id="fila_buscar_profesor">
                             <input type="text" placeholder="Buscar por..." name="search_professors" id="buscar">
-                        </td>
-                        <!--
-                        <script>
-                            let txtInput = document.getElementById("buscar");
-                            txtInput.style.border= "solid 4px green";
-                        </script>
-                        -->
-                        <td>
-                            <input type="submit" value="Buscar" id="btn_buscar">
+                            <input type="submit" value="Buscar" class="btnBuscarHover" id="btn_buscar">
                         </td>
                     </tr>
                     <tr>
@@ -94,11 +80,11 @@
                             <label for="p_documento"> Documento</label>
                         </td>
                         <td>
-                            <input type="checkbox" id="p_genero" value="genero">
+                            <input type="checkbox" name="search_gender" id="p_genero" value="genero">
                             <label for="p_genero"> Genero</label>
                         </td>
                         <td>
-                            <select name="search_gender" id="p_genero_elegido">
+                            <select name="gender_value" id="p_genero_elegido">
                                 <option value="1">Masculino</option>
                                 <option value="0">Femenino</option>
                             </select>
@@ -108,59 +94,162 @@
                             <label for="p_estado"> Activo</label>
                         </td>
                     </tr>
+                    <tr id="fila_resultado_profesor">
+                        <td colspan="7">
+                            <div>
+                                EXITO <!--<b class="ok">√</b> <b class="error">x</b> -->
+                            </div>
+                        </td>
+                    </tr>
+                    <tr id="fila_flecha">
+                        <td colspan="7">
+                            <div class="flecha">
+                                <b class="tronco"></b> <b class="punta"></b>
+                            </div>
+                        </td>
+                    </tr>
                 </table>
             </form>
                 <!--Datos obtenidos de DB-->
-            <table class="tabla_profesores">
+            <table class="tabla_profesores" id="datos_profesores">
                 <caption>
                     PROFESORES
                 </caption>
                 <tr>
-                    <th class="encabezado">Legajo</th><th class="encabezado">Nombre</th><th class="encabezado">Apellido</th><th class="encabezado">Genero</th><th class="encabezado">Documento</th><th class="encabezado">Activo</th><th  class="encabezado" id="agregar">Agregar</th>
+                    <th class="encabezado">Legajo</th>
+                    <th class="encabezado">Nombre</th>
+                    <th class="encabezado">Apellido</th>
+                    <th class="encabezado">Genero</th>
+                    <th class="encabezado">Documento</th>
+                    <th class="encabezado">Activo</th>
+                    <th class="encabezado fxHov_profe" id="agregar_prof">Agregar</th>
                 </tr>
-                <tr class="dato" id="1">
-                    <td><input type="text" id="leg1" readonly disabled value="1"></td>
-                    <td><input type="text" id="nom1" readonly disabled value="Alberto"></td>
-                    <td><input type="text" id="ape1" readonly disabled value="Hijo de puta"></td>
-                    <td>
-                        <input type="text" id="gen1" readonly disabled value="Masculino">
-                        <!--
-                        <select  readonly disabled>
-                            <option value="1">Masculino</option>
-                            <option value="0">Femenino</option>
-                            <option value="2" selected>homosesual</option>
-                        </select>
-                        -->
-                    </td>
-                    <td><input type="text" id="cod1" readonly disabled value="17457124"></td>
-                    <td><input type="text" id="act1" readonly disabled value="Pasivo"></td>
-                    <td><a href="#" class="verde">Actualizar</a>&nbsp;<a href="#" class="rojo">Eliminar</a></td>
+                
+                <tr id="dato_profesor_1">
+                    <form action="Principal" method="GET">
+                        <input type="hidden" name="instruccion" value="actualizar_Profesor">
+
+                        <td><input type="text" name="professor_id" readonly disabled value="1"></td>
+                        <td><input type="text" name="proffesor_name" readonly disabled value="Alberto"></td>
+                        <td><input type="text" name="proffesor_lastname" readonly disabled value="Hijo de puta"></td>
+                        <td>
+                            <input type="text" class="genero" readonly disabled value="Masculino">
+                            <select name="professor_gender" class="ocultar">
+                                <option value="1">Masculino</option>
+                                <option value="0">Femenino</option>
+                            </select>
+                        </td>
+                        <td><input type="text" name="proffesor_document" readonly disabled value="17457124"></td>
+                        <td>
+                            <input type="checkbox" name="professor_state" id="estado_1" class="ocultar">
+                            <input type="text" class="estado" for="estado_1" readonly disabled value="Inactivo">
+                        </td>
+                        <td class="contenedor_botones">
+                            <input type="button" class="verde btn_V fxHov_btnV" onclick="obtener_acceso('dato_profesor_1')" value = "Actualizar">
+                            <input type="button" class="rojo btn_R fxHov_btnR" onclick="eliminar_dato('dato_profesor_1')" value = "Eliminar">
+                        
+                            <input type="button" class="ocultar verde btn_V fxHov_btnV" onclick="guardar_dato()" value = "Guardar">
+                            <input type="button" class="ocultar rojo btn_R fxHov_btnR" onclick="cancelar_acceso()" value = "Cancelar">
+                        </td>
+                    </form>
+                </tr>
+                <tr id="dato_profesor_2">
+                    <form action="Principal" method="GET">
+                        <input type="hidden" name="instruccion" value="actualizar_Profesor">
+
+                        <td><input type="text" name="professor_id" readonly disabled value="2"></td>
+                        <td><input type="text" name="professor_name" readonly disabled value="Victoria"></td>
+                        <td><input type="text" name="professor_lastname" readonly disabled value="Gandini"></td>
+                        <td>
+                            <input type="text" class="genero" readonly disabled value="Femenino">
+                            <select name="professor_gender" class="ocultar">
+                                <option value="1">Masculino</option>
+                                <option value="0">Femenino</option>
+                            </select>
+                        </td>
+                        <td><input type="text" name="professor_document" readonly disabled value="38124541"></td>
+                        <td>
+                            <input type="checkbox" name="professor_state" id="estado_2" class="ocultar">
+                            <input type="text" class="estado" for="estado_2" readonly disabled value="Activo">
+                        </td>
+                        <td class="contenedor_botones">
+                            <input type="button" class="verde btn_V" onclick="obtener_acceso('dato_profesor_2')" value = "Actualizar">
+                            <input type="button" class="rojo btn_R" onclick="eliminar_dato('dato_profesor_2')" value = "Eliminar">
+                        
+                            <input type="button" class="ocultar verde btn_V" onclick="guardar_dato()" value = "Guardar">
+                            <input type="button" class="ocultar rojo btn_R" onclick="cancelar_acceso()" value = "Cancelar">
+                        </td>
+                    </form>
+                </tr>
+                <tr id="dato_profesor_3">
+                    <form action="Principal" method="GET">
+                        <input type="hidden" name="instruccion" value="actualizar_Profesor">
+
+                        <td><input type="text" name="professor_id" readonly disabled value="3"></td>
+                        <td><input type="text" name="professor_name" readonly disabled value="Franco"></td>
+                        <td><input type="text" name="professor_lastname" readonly disabled value="Garcia"></td>
+                        <td>
+                            <input type="text" class="genero" readonly disabled value="Masculino">
+                            <select name="professor_gender" class="ocultar">
+                                <option value="1">Masculino</option>
+                                <option value="0">Femenino</option>
+                            </select>
+                        </td>
+                        <td><input type="text" name="professor_document" readonly disabled value="32373227"></td>
+                        <td>
+                            <input type="checkbox" name="professor_state" id="estado_3" class="ocultar">
+                            <input type="text" class="estado" for="estado_3" readonly disabled value="Activo">
+                        </td>
+                        <td class="contenedor_botones">
+                            <input type="button" class="verde btn_V" onclick="obtener_acceso('dato_profesor_3')" value = "Actualizar">
+                            <input type="button" class="rojo btn_R" onclick="eliminar_dato('dato_profesor_3')" value = "Eliminar">
+                        
+                            <input type="button" class="ocultar verde btn_V" onclick="guardar_dato()" value = "Guardar">
+                            <input type="button" class="ocultar rojo btn_R" onclick="cancelar_acceso()" value = "Cancelar">
+                        </td>
+                    </form>
                 </tr>
             </table>
             <!--AGREGAR PROFESOR-->
-            <form action="Principal" method="GET" id="agregar_profesor">
+            <form action="Principal" method="GET" id="agregar_profesor" class="ocultar opacidad">
+                <b class="cierre_boton" id="btn_cierre_prof">X</b>
                 <fieldset>
                     <input type="hidden" name="instruccion" value="insert_professor">
                     <legend>Agregar Profesor</legend>
                     <table>
                         <tr>
-                            <td><label for="nombre">Nombre</label></td>
-                            <td><input type="text" name="professor_name" id="nombre"></td>
+                            <td colspan="2"><input type="text" placeholder="Nombre" name="professor_name" id="nombre"></td>
                         </tr>
                         <tr>
-                            <td><label for="apellido">Apellido</label></td>
-                            <td><input type="text" name="professor_lastName" id="apellido"></td>
+                            <td class="fila_estado" colspan="2">
+                                <b>
+                                </b>
+                            </td>
                         </tr>
                         <tr>
-                            <td><label for="documento">Documento</label></td>
-                            <td><input type="text" name="document" id="documento"></td>
+                            <td colspan="2"><input type="text" placeholder="Apellido" name="professor_lastName" id="apellido"></td>
                         </tr>
                         <tr>
-                            <td><input type="radio" name="gender" id="masculino" value="1"><label for="masculino">Masculino</label></td>
-                            <td><input type="radio" name="gender" id="femenino" value="0"><label for="femenino">Femenino</label></td>
+                            <td class="fila_estado" colspan="2">
+                                <b>
+                                </b>
+                            </td>
                         </tr>
                         <tr>
-                            <td><label for="activo">Activo </label><input type="checkbox" name="active" id="activo"></td>
+                            <td colspan="2"><input type="text" placeholder="Documento" name="professor_document" id="documento"></td>
+                        </tr>
+                        <tr>
+                            <td class="fila_estado" colspan="2">
+                                <b>
+                                </b>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><input type="radio" name="professor_gender" id="masculino" value="1"><label for="masculino"> Masculino</label></td>
+                            <td><input type="radio" name="professor_gender" id="femenino" value="0"><label for="femenino"> Femenino</label></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"><label for="activo">Activo </label> <input type="checkbox" name="active" id="activo"></td>
                         </tr>
                         <tr>
                             <td colspan="2"><input type="submit" value="Registrar"></td>

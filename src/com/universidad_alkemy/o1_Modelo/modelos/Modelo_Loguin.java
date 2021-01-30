@@ -3,9 +3,7 @@ package com.universidad_alkemy.o1_Modelo.modelos;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
 import javax.sql.DataSource;
-
 import com.universidad_alkemy.o1_Modelo.conexion.Conexion;
 
 public class Modelo_Loguin

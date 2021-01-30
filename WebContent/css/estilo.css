@@ -1,14 +1,24 @@
 :root{
+    /*-----------------------[VARIABLES]------------------------*/
+    
+    /*==========================================================*/
+    /*                      MENU PRINCIPAL                      */
+    /*==========================================================*/
     --fondo-menu_principal: #333;
     --color-bordes_principales: deepskyblue;
     --fondo-oscuro_transparente:  rgba(0, 0, 0, 0.40);
+    --fondo_oscuro__hover: #555;
+    --color_fuente_hover: rgb(190,190,190);
+    --color_letra__menu_principal: whitesmoke;
     --efecto-fondo_1:white;
     --efecto-fondo_2:aliceblue;
     --efecto-fondo_3:lightskyblue;
     --encabezado_tabla: aliceblue;
+    
     --fuente_botones: Verdana, Geneva, Tahoma, sans-serif, serif;
     --fuente_encabezados_tablas:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     --fuente_datos: 'Courier New', Courier, monospace;
+    
     --color_boton: deepskyblue;
     --color_boton_texto: white;
     --color_boton__hover: skyblue;
@@ -16,69 +26,144 @@
     --efecto_subrayado: whitesmoke;
     --color_boton_texto_header: deepskyblue;
     --color_boton_header__hover: #666;
-    --color_fondo_boton_update: green;
-    --color_fondo_boton_delete: red;
-    --color_fondo_boton_update_hover: chartreuse;
+    --color_ok: chartreuse;
+    --color_error: crimson;
+    --color_fondo_ok: green;
+    --color_fondo_error: red;
+    --color_fondo_ok__hover: chartreuse;
     --color_fondo_boton_delete_hover: tomato;
+    --color_fondo_ok_claro: rgba(220, 235, 210, 0.50);
+    --color_fondo_error_claro: rgba(245, 210, 205, 0.50);
+
+    --tiempo_transicion : "all 0.8s"; /*Cuando ande, probar si funciona*/
 }
 *{
     margin:0;
     padding:0;
 }
-h1{
-    display: inline-block;
-    font-family: 'Courier New', Courier, monospace;
-    color: whitesmoke;
+/*
+    fxHov_profe
+    fxHov_btnV
+    fxHov_btnR
+
+    agregar_prof
+    verde
+    rojo
+    btn_V
+*/
+/*----------------------------------------------------------*/
+/*                CLASES ANIMACION DESPLEGAR                */
+/*----------------------------------------------------------*/
+.ocultar{
+    display: none;
 }
-#logo_loguin{
-    display: inline-block;
-    background-image: url("../img/logo.png");
-    background-size: auto;
-    width: 56px;
-    height: 56px;
-    position: relative;
-    top:10px;
+.transicion{
+    transition: all 0.8s;
 }
-header {
+.opacidad{
+    opacity: 0;
+}
+/*----------------------------------------------------------*/
+/*                   CLASES ICONOS OK/ERROR                 */
+/*----------------------------------------------------------*/
+
+.ok{
+    display: inline-block;
+    
+    background-color: var(--color_ok);
+    color: var(--color_boton_texto);
+    
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: normal;
+    font-size: 16px;
+    text-align: center;
+
+    border-radius: 50%;
+    padding: 4px 9px;
+}
+.error{
+    display: inline-block;
+    background-color: var(--color_error);
+    color: var(--color_boton_texto);
+    
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: 20px;
+    text-align: center;
+    
+    border-radius: 50%;
+    padding: 2px 8px;
+}
+/*==========================================================*/
+/*                      MENU PRINCIPAL                      */
+/*==========================================================*/
+#Menu_Principal .saludo{
+    display: inline-block;
+    position: absolute;
+    top: 24px;
+    right: 30px;
+    font-size: 24px;
+    color: var(--color_boton_texto);
+}
+#Menu_Principal{
     display: fixed;
     position: absolute;
+    box-sizing: border-box;
     height: 200px;
     width: 100%;
-    box-sizing: content-box;
     background-color: var(--fondo-menu_principal);
     justify-content: center;
     border-bottom: 4px solid var(--color-bordes_principales);
 }
-header form{
-    display: flex;
-    justify-content: end;
-    margin-right: 20px;
-    color: whitesmoke;
+#Menu_Principal h1{
+    display: inline-block;
+    font-family: 'Courier New', Courier, monospace;
+    color: var(--color_letra__menu_principal);
 }
-header form fieldset{
+#logo_loguin{
+    display: inline-block;
+    position: relative;
+    background-image: url("../img/logo.png");
+    background-size: auto;
+    width: 56px;
+    height: 56px;
+    top:10px;
+}
+#Menu_Principal form{
+    display: inline-block;
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    margin-right: 20px;
+    color: var(--color_letra__menu_principal);
+}
+#Menu_Principal form fieldset{
     display: inline-block;
     padding: 4px;
     border-radius: 8px;
+}
+#Menu_Principal form fieldset table tr td{
+    border: none;
 }
 .boton{
     padding: 2px 4px;
     border: none;
     border-radius: 8px;
-    background-color: aliceblue;
+    background-color: var(--efecto-fondo_2);
     color: #444;
     font-weight: bold;
     font-size: 18px;
     cursor: pointer;
 }
 .boton:hover{
-    color:darkblue;
+    color:var(--color_boton_texto__hover);
     background-color: rgba(240, 248, 255, 0.75);
 }
 .boton:active{
     color: black;
     background-color: white;
 }
-header ul{
+#Menu_Principal ul{
     display: flex;
     position: absolute;
     right: 30px;
@@ -86,29 +171,32 @@ header ul{
     justify-content: center;
     list-style: none;
 }
-header ul li:hover{
-    background-color: #666;
+/*---------------------Efecto botones--------------------*/
+#Menu_Principal ul li:hover{
+    background-color: var(--color_boton_header__hover);
     transition: 0.6s;
 }
-header ul li:active{
-    background-color: #666;
+
+#Menu_Principal ul li .subrayado:active{
+    background-color: var(--color_boton_header__hover);
     color: aliceblue;
     transition: 0s;
 }
-header ul li{
+/*-------------------------------------------------------*/
+#Menu_Principal ul li{
     display: inline-block;
     margin-left: 6px;
     padding: 10px 20px;
     border-radius: 8px;
     cursor: pointer;
 }
-header ul li a{
+#Menu_Principal ul li .subrayado{
     font-family: sans-serif;
     font-weight: bold;
     font-size: 24px;
     text-decoration: none;
     text-align: center;
-    color: deepskyblue;
+    color: var(--color_boton_texto_header);
 }
 .subrayado::after{
     content: '';
@@ -122,12 +210,10 @@ header ul li a{
     width: 100%;
     transition: width 0.3s;
 }
-.disable{
-    display: none;
-}
-.hide{
-    visibility: hidden;
-}
+/*==========================================================*/
+/*----------------------------------------------------------*/
+/*==========================================================*/
+
 /*----------------------------------------*/
 /*           ANIMACION IMAGENES           */
 /*----------------------------------------*/
@@ -137,9 +223,10 @@ header ul li a{
     height: 300px;
     overflow: hidden;
 }
+
 .middle{
     position: absolute;
-    top: 360px;
+    top: 354px;
     left: 50%;
     transform: translate(-50%, -50%);
 }
@@ -203,109 +290,21 @@ section{
     position: absolute;
     justify-content: center;
     align-items: center;
-    top: 516px;
+    top: 508px;
     width: 100%;
     border-top: 4px solid var(--color-bordes_principales);
     background: linear-gradient(to bottom right,var(--efecto-fondo_1), var(--efecto-fondo_2), var(--efecto-fondo_3));
     border-bottom: 4px solid var(--color-bordes_principales);
 }
 section form{
-    
-    background: var(--fondo-oscuro_transparente);
-    padding: 10px 20px;
-    border-radius: 12px;
     margin-top: 20px;
     margin-bottom: 20px;
 }
-section form fieldset{
-    padding: 5px 10px;
-    border-radius: 6px;
-}
-section form fieldset legend{
-    font-weight: bold;
-    font-style: italic;
-    font-size: 18px;
-}
-form fieldset input[type = submit]{
-    width: 100%;
-    font-family: serif;
-    font-size: 18px;
-    font-weight: bold;
-    color: var(--color_boton_texto);
-    border: none;
-    background-color: var(--color_boton);
-    padding: 6px 0;
-}
-form fieldset input[type = reset]{
-    width: 100%;
-    font-family: serif;
-    font-size: 18px;
-    font-weight: bold;
-    color: var(--color_boton_texto);
-    border: none;
-    background-color: var(--color_boton);
-    padding: 6px 0;
-}
-/*Efecto hover Botones Insertar*/
-form fieldset input[type = submit]:hover{
-    background-color: skyblue;
-    color: darkblue;
-}
-form fieldset input[type = reset]:hover{
-    background-color: skyblue;
-    color: darkblue;
-}
-/*=======================================================*/
-/*======================| BUSCADOR |=====================*/
-/*=======================================================*/
-
+/*===========================================================*/
+/*-----------------------FORM BUSCADOR-----------------------*/
+/*===========================================================*/
 #form_buscador{
     background: none;
-
-}
-.tabla_profesores tr th,td{
-    min-width: 200px;
-    text-align: center;
-    border: 1px solid black;
-}
-/*------------------INPUTS-----------------*/
-.tabla_profesores tr td input[type=text]{
-    border: none;
-    text-align: center;
-    font-size: 18px;
-    font-family: var(--fuente_datos);
-    font-weight: bold;
-    width: 100%;
-    height: 100%;
-}
-/*------------------SELECT-----------------*/
-.tabla_profesores tr td select{
-    border: none;
-    text-align: center;
-    font-size: 18px;
-    font-family: var(--fuente_datos);
-    font-weight: bold;
-    width: 100%;
-    height: 100%;
-}
-.tabla_profesores tr td select option{
-    text-align: center;
-}
-.tabla_profesores tr{
-    height: 40px;
-}
-.tabla_profesores .encabezado{
-    background-color: var(--fondo-menu_principal);
-    color:var(--encabezado_tabla);
-    font-family: var(--fuente_encabezados_tablas);
-    font-size: 20px;
-    font-weight: bolder;
-}
-.tabla_profesores caption{
-    font-size: 28px;
-    font-weight: 900;
-    text-align: center;
-    font-family: var(--fuente_botones);
 }
 .tabla_buscador{
     display: block;
@@ -330,7 +329,28 @@ form fieldset input[type = reset]:hover{
     font-weight: bold;
     border-radius: 8px;
 }
+#fila_buscar_profesor{
+    display: flex;
+    justify-content: center;
+}
+#fila_resultado_profesor{
+    display: flex;
+    justify-content: center;
+}
+#fila_resultado_profesor div{
+    display: inline-block;
+    margin: 10px 0;
+    background-color: transparent;
+    border: none;
+    text-align: center;
+    font-weight: normal;
+    font-size: 14px;
+    height: 40px;
+}
+/*-------------------------------------------------*/
+/*-------------------Input Buscar------------------*/
 #buscar{
+    margin-left: -20px;
     min-width: 200px;
     min-height: 40px;
     text-align: center;
@@ -338,8 +358,11 @@ form fieldset input[type = reset]:hover{
     font-family: var(--fuente_botones);
     border-radius: 12px;
 }
-/*Boton Buscar*/
+
+/*-------------------------------------------------*/
+/*-------------------Boton Buscar------------------*/
 #btn_buscar{
+    margin-left: 20px;
     min-width: 100px;
     min-height: 40px;
     text-align: center;
@@ -352,42 +375,295 @@ form fieldset input[type = reset]:hover{
     color: var(--color_boton_texto);
     box-sizing: content-box;
 }
-#btn_buscar:hover{
+#btnBuscarHover:hover{
     background-color: var(--color_boton__hover);
     color: var(--color_boton_texto__hover);
 }
-/*Boton Agregar*/
-#agregar:hover{
-    background-color: var(--color_boton_header__hover);
-    color: var(--color_boton_texto_header);
-    cursor: pointer;
-    transition: 0.6s;
+/*-----------------------------------------------------------*/
+/*--------------------[ FILA RESULTADO ]---------------------*/
+#fila_resultado_profesor{
+    position: relative;
+    width: 60%;
+    height: 80px;
+    margin: auto;
 }
-#agregar:active{
-    transition: 0s;
-    background-color: black;
-    color: whitesmoke;
+#fila_resultado_profesor{
+    border: var(--color_fondo_error) solid 4px;
+    background-color: var(--color_fondo_error_claro);
+    border-radius: 12px;
 }
-.tabla_profesores tr td a{
+/*-----------------------------------------------------------*/
+/*------------------------[ FLECHA ]-------------------------*/
+#fila_flecha{
+    position: relative;
+    display: flex;
+    height: 100px;
+    width: 100%;
+    justify-content: center;
+    transform: translateX(40px);
+}
+#fila_flecha td{
+    
+    height: 140
+}
+.flecha{
+    display: inline-block;
+    position: relative;
+    top: 40px;
+    width: 100%;
+
+}
+.tronco{
+    position: absolute;
+    display: flex;
+    margin-left: 40px;
+    margin-top: -40px;
+    border: red solid 20px;
+    height: 10px;
+}
+.punta{
+    position: absolute;
+    display: flex;
+
+    border-top: red solid 60px;
+    border-bottom:  transparent solid 60px;
+    border-left:  transparent solid 60px;
+    border-right:  transparent solid 60px;
+    height: 10px;
+    width: 2px;
+}
+/*___________________________________________________________*/
+/*===========================================================*/
+/*---------------------FIN FORM BUSCADOR---------------------*/
+/*===========================================================*/
+
+
+/*===========================================================*/
+/*----------------------TABLA PROFESORES---------------------*/
+/*===========================================================*/
+.tabla_profesores tr th,td{
+    min-width: 200px;
+    text-align: center;
+    border: 1px solid black;
+}
+/*------------------INPUTS-----------------*/
+.tabla_profesores tr td input[type=text]{
+    border: none;
+    text-align: center;
+    font-size: 18px;
+    font-family: var(--fuente_datos);
+    font-weight: bold;
+    width: 100%;
+    height: 100%;
+}
+
+.tabla_profesores caption{
+    font-size: 28px;
+    font-weight: 900;
+    text-align: center;
+    font-family: var(--fuente_botones);
+}
+/*-----------------------------------------------*/
+/*-------------------ENCABEZADO------------------*/
+/*-------------(btn_agregar_profesor)------------*/
+.tabla_profesores .encabezado{
+    background-color: var(--fondo-menu_principal);
+    color:var(--encabezado_tabla);
+    font-family: var(--fuente_encabezados_tablas);
+    font-size: 20px;
+    font-weight: bolder;
+}
+/*-----------------------------------------------*/
+.tabla_profesores tr{
+    height: 40px;
+}
+/*-----------------------------------------------*/
+/*--------------------SELECT---------------------*/
+.tabla_profesores tr td select{
+    border: none;
+    text-align: center;
+    font-size: 18px;
+    font-family: var(--fuente_datos);
+    font-weight: bold;
+    width: 100%;
+    height: 100%;
+}
+.tabla_profesores tr td select option{
+    text-align: center;
+}
+/*------------------------------------------------*/
+/*---------------------BOTONES--------------------*/
+.tabla_profesores tr td input[type="button"]{
+    width: 130px;
     font-family: var(--fuente_encabezados_tablas);
     font-weight: bold;
     font-size: 20px;
     text-decoration: none;
     padding: 4px 12px;
+    transition: 0.6s;
+    border: none;
+    cursor: pointer;
+}
+.contenedor_botones{
+    display: flex;
+    flex-direction: row;
 }
 .tabla_profesores tr td .verde{
     color: var(--color_boton_texto);
-    background-color: var(--color_fondo_boton_update);
+    background-color: var(--color_fondo_ok);
 }
 .tabla_profesores tr td .rojo{
     color: var(--color_boton_texto);
-    background-color: var(--color_fondo_boton_delete);
+    background-color: var(--color_fondo_error);
 }
-.tabla_profesores tr td .verde:hover{
-    background-color: var(--color_fondo_boton_update_hover);
+.tabla_profesores tr td .fxHov_btnV:hover{
+    background-color: var(--color_fondo_ok__hover);
     color: var(--color_boton_texto__hover);
 }
-.tabla_profesores tr td .rojo:hover{
-    background-color: var(--color_fondo_boton_delete_hover);
+.tabla_profesores tr td .fxHov_btnR:hover{
+    background-color: var(--color_fondo_error__hover);
     color: var(--color_boton_texto__hover);
 }
+/*------------------------------------------------------------*/
+/*-------------------Boton Agregar Profesores-----------------*/
+.fxHov_profe:hover{
+    background-color: var(--color_boton_header__hover);
+    color: var(--color_boton_texto_header);
+    cursor: pointer;
+    transition: 0.6s;
+}
+.fxHov_profe:active{
+    transition: 0s;
+    background-color: black;
+    color: whitesmoke;
+}
+
+/*===========================================================*/
+/*--------------------FIN TABLA PROFESORES-------------------*/
+/*===========================================================*/
+
+/*===========================================================*/
+/*--------------------FORM NUEVO PROFESOR--------------------*/
+/*===========================================================*/
+#agregar_profesor{
+    position: absolute;
+    background: var(--fondo-oscuro_transparente);
+    padding: 10px 20px;
+    border-radius: 12px;
+    top: 0;
+    border: black inset 4px;
+}
+#agregar_profesor fieldset{
+    padding: 5px 10px;
+    border-radius: 6px;
+    margin-top: 30px;
+}
+#agregar_profesor fieldset legend{
+    font-family: var(--fuente_botones);
+    font-weight: bold;
+    font-size: 24px;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+#agregar_profesor fieldset input[type="text"]{
+    width: 100%;
+    font-size: 18px;
+    text-align: center;
+    height: 40px;
+}
+#agregar_profesor fieldset input[type="radio"]{
+    width: 20px;
+    height: 40px;
+    font-size: 18px;
+    text-align: center;
+}
+#agregar_profesor fieldset input[type="checkbox"]{
+    width: 20px;
+    height: 40px;
+    font-size: 18px;
+    text-align: center;
+}
+#agregar_profesor fieldset label{
+    position: relative;
+    bottom: 14px;
+    height: 40px;
+    font-size: 20px;
+    color: white;
+    font-weight: normal;
+}
+#agregar_profesor fieldset .fila_estado{
+    height: 40px;
+}
+#agregar_profesor fieldset b{
+    display: inline-block;
+    width: 100%;
+    font-family: var(--fuente_botones);
+    font-size: 14px;
+    font-weight: normal;
+    text-align: center;
+    color: var(--color_boton_texto);
+}
+#agregar_profesor fieldset table tr td{
+    border: none;
+}
+/*---------------------------------------------------------*/
+/*-------------------------Botones-------------------------*/
+
+#agregar_profesor fieldset input[type = submit]{
+    width: 100%;
+    font-family: var(--fuente_botones);
+    font-size: 22px;
+    font-weight: bold;
+    color: var(--color_boton_texto);
+    border: none;
+    background-color: var(--color_boton);
+    padding: 6px 0;
+    cursor: pointer;
+}
+#agregar_profesor fieldset input[type = reset]{
+    width: 100%;
+    font-family: var(--fuente_botones);
+    font-size: 22px;
+    font-weight: bold;
+    color: var(--color_boton_texto);
+    border: none;
+    background-color: var(--color_boton);
+    padding: 6px 0;
+    cursor: pointer;
+}
+.cierre_boton{
+    position: absolute;
+    background-color: var(--fondo-menu_principal);
+    font-size: 24px;
+    font-weight: bold;
+    top:12px;
+    right: 12px;
+    border: 3px solid var(--efecto-fondo_1);
+    color: var(--efecto-fondo_1);
+    border-radius: 50%;
+    padding: 2px 6px;
+    cursor: pointer;
+    transition: 0.6s;
+}
+/*---------------------------------------------------------*/
+/*-------------------Efecto hover Botones------------------*/
+
+#agregar_profesor fieldset input[type = submit]:hover{
+    background-color: var(--color_boton__hover);
+    color: var(--color_boton_texto__hover);
+}
+#agregar_profesor fieldset input[type = reset]:hover{
+    background-color: var(--color_boton__hover);
+    color: var(--color_boton_texto__hover);
+}
+.cierre_boton:hover{
+    background-color: var(--fondo_oscuro__hover);
+    border-color: var(--color_fuente_hover);
+    color: var(--color_fuente_hover);
+}
+
+/*===========================================================*/
+/*--------------------FORM NUEVO PROFESOR--------------------*/
+/*===========================================================*/
+
